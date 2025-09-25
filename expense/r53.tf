@@ -1,8 +1,8 @@
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "expense" {
     count = length(var.instance_names)
     zone_id = var.zone_id
     name    = "${var.instance_names[count.index]}.${var.domain_name}"
     type    = "A"
     ttl     = 1
-    records = [instances_info.aws_instance.expense.public_ip]
+    records = [aws_instance.expense[count.index].public_ip]
 }
